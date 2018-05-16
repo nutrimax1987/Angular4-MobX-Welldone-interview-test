@@ -1,0 +1,125 @@
+<div class="section">
+  <app-tooltip [title]="'Locations'"
+               [isSelected]="selectedIndex !== null"
+               (add)="add()"
+               (update)="update()"
+               (remove)="remove()">
+  </app-tooltip>
+  <br>
+  <div class="columns">
+    <div class="overlay column is-1 menu">
+      <p></p>
+      <p class="menu-label is-uppercase">
+        Categories
+      </p>
+      <ul class="menu-list">
+        <li class="is-medium" (click)="onCategoryClick(category.name,i)"
+            *ngFor="let category of categories.getAll; index as i">
+          <a class="" [ngClass]="{'is-active': i === selectedCatIndex }">{{category.name}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="column is-1"></div>
+    <div class="column is-5">
+      <div class="columns column">
+        <input placeholder="Name" class="column input is-medium"
+               [(ngModel)]="location.name"/>
+        <input placeholder="Address" class="column input is-medium"
+               [(ngModel)]="location.address"/>
+        <input placeholder="latitude" class="column input is-medium"
+               [(ngModel)]="location.lat"/>
+        <input placeholder="longtitude" class="column input is-medium"
+               [(ngModel)]="location.lng"/>
+      </div>
+    </div>
+    <div class="column is-6">
+      <form class="columns on-map" (keydown)="searchResult()">
+        <input placeholder="Search & Press enter"
+               autocorrect="off"
+               autocapitalize="off"
+               class="column"
+               spellcheck="off"
+               type="text"
+               [(ngModel)]="_search"
+               class="column input is-medium"
+               #search [formControl]="searchControl" autofocus/>
+        <input (click)="searchResult()"
+               class="column"
+               value="Search"
+               class="button
+               is-success is-medium">
+      </form>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column is-1"></div>
+    <div class="column is-5">
+      <div class="table-container">
+        <table class="table is-fullwidth is-scrollable is-responsive is-hoverable" *mobxAutorun>
+          <thead>
+          <tr>
+            <th>
+              <a class="is-link is-inverted">
+                 <span (click)="locations.sortAZ()" *ngIf="locations.sorting === 'DESC'">
+                   <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                  <span class="is-uppercase">name</span>
+                 </span>
+                <span (click)="locations.sortZA()" *ngIf="locations.sorting === 'ASC'">
+                   <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                   <span class="is-uppercase">name</span>
+                 </span>
+              </a>
+            </th>
+            <th>
+              <a class="is-link is-inverted">
+                <span class="is-uppercase">address</span>
+              </a>
+            </th>
+            <th>
+              <a class="is-link is-inverted">
+                <span class="is-uppercase">coordinates</span>
+              </a>
+            </th>
+            <th>
+              <a class="is-link is-inverted">
+                <span class="is-uppercase">category</span>
+              </a>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr (click)="onLocationClick(location,i)" [ngClass]="{'is-selected' : i === selectedIndex }"
+              class="category-item" *ngFor="let location of locations.getAll; index as i">
+            <td>{{ location?.name }}</td>
+            <td>{{ location?.address }}</td>
+            <td>
+              {{ location?.lat }} , {{ location?.lng }}
+            </td>
+            <td>{{ location?.category }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="column is-6">
+      <agm-map [latitude]="location?.lat"
+               (mapClick)="onMapClick($event)"
+               [longitude]="location?.lng"
+               [scrollwheel]="false" [zoom]="zoom">
+        <agm-marker
+          *ngFor="let location of _locationsOnMap; let i = index"
+          (markerClick)="selectLocationOnMap($event)"
+          [latitude]="location?.lat"
+          [longitude]="location?.lng"
+          [label]="location?.name"
+          (dragEnd)="onLocationDrag(location)">
+          <agm-info-window>
+            <strong>{{location?.address}}</strong>
+          </agm-info-window>
+        </agm-marker>
+      </agm-map>
+    </div>
+  </div>
+</div>
+

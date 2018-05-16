@@ -1,0 +1,23 @@
+<div class="section">
+  <app-tooltip [title]="'Categories'"
+               [isSelected]="selectedIndex !== null"
+               (add)="add()"
+               (update)="update()"
+               (remove)="remove()">
+  </app-tooltip>
+  <div class="columns padding-left">
+    <ul class="menu-list">
+      <li class="is-medium">
+        <input class="input is-medium"
+               placeholder="Enter new category..."
+               [(ngModel)]="_input"
+               [value]="selectedCat?.name"
+               autofocus/>
+      </li>
+      <li class="is-medium" (click)="setSelected(category, i)"
+          *ngFor="let category of categories.getAll; index as i">
+        <a [ngClass]="{'is-active' : i === selectedIndex }">{{category?.name}}</a>
+      </li>
+    </ul>
+  </div>
+</div>

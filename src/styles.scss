@@ -1,0 +1,59 @@
+@import "~bulma/bulma.sass";
+
+html, body {
+  background-color: #f1ffea;
+  height: 100%;
+}
+
+.center {
+  justify-content: center;
+}
+
+.primary {
+  color: $cyan;
+}
+
+.purple {
+  color: $yellow;
+}
+
+.blue {
+  color: $cyan;
+}
+
+.yellow {
+  color: $warning;
+}
+
+.orange {
+  color: $orange;
+}
+
+.red {
+  color: $red;
+}
+
+.padding-left {
+  position: absolute;
+  left: 20%;
+  top: 11%;
+}
+
+.section {
+  height: 1050px;
+  .table-container {
+    overflow-y: scroll;
+    height: 800px;
+    padding: 1%;
+  }
+}
+
+.category-dropdown {
+  position: absolute;
+  width: 20%;
+  padding-top: 1%;
+}
+
+.on-map {
+  padding-top: 1%;
+}

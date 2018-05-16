@@ -1,0 +1,6 @@
+.padding-right {
+  flex-direction: row;
+  align-items: flex-end;
+  padding-left: 19%;
+  padding-top: 14px;
+}

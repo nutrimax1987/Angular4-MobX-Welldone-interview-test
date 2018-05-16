@@ -1,0 +1,30 @@
+<div class="columns has-text-centered">
+  <div class="column is-half">
+    <h1 class="title"
+        [ngClass]="{'primary': title ==='Categories', 'purple': title ==='Locations'}">
+      {{title}}
+    </h1>
+  </div>
+  <div class="column is-1">
+    <button *ngIf="!_isSelected" (click)="add.emit()"
+            class="button is-large is-success tooltip is-tooltip-right"
+            data-tooltip="Tooltip Text">
+      ADD
+    </button>
+  </div>
+  <div class="column is-1">
+    <button *ngIf="_isSelected" (click)="update.emit()"
+            class="button is-large is-warning tooltip is-tooltip-bottom"
+            data-tooltip="Tooltip Text">
+      Update
+    </button>
+  </div>
+  <div class="column is-1">
+    <button *ngIf="_isSelected" (click)="remove.emit()"
+            class="button is-large is-danger tooltip is-tooltip-left"
+            data-tooltip="Tooltip Text">
+      Remove
+    </button>
+  </div>
+</div>
+
