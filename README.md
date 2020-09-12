@@ -1,10 +1,11 @@
-I used Angular 5 + mobx + angular routing ( instead react-routing )
+Technologies:
+Angular 5, mobx
 
-* Also categories will be added automatically while adding locations from autocomplete .
+* Categories will be added automatically while adding locations from autocomplete .
 
-1. Run in terminal  `npm install`
+1.`npm install`
 
-2. Then run `npm start`
+2.`npm start`
 
-3: Open browser at `http://localhost:4200` to see the result
+3: Open browser at `http://localhost:4200` 
 
